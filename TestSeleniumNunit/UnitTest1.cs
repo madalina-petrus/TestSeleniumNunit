@@ -12,6 +12,7 @@ namespace TestSeleniumNunit
         public void Setup()
         {
             WebDriver = new ChromeDriver("D://internship//TestSeleniumNunit//TestSeleniumNunit//driver");
+            WebDriver.Manage().Window.Maximize();
         }
 
         [Test]
@@ -78,7 +79,6 @@ namespace TestSeleniumNunit
         }
 
         [Test]
-
         public void search()
         {
             
@@ -88,6 +88,16 @@ namespace TestSeleniumNunit
             search.SendKeys("woman");
             search.Submit();
             Assert.That("http://qa1magento.dev.evozon.com/catalogsearch/result/?q=woman", Is.EqualTo(WebDriver.Url));
+        }
+        [Test]
+        public void newProductList()
+        {
+            WebDriver.Navigate().GoToUrl("http://qa2magento.dev.evozon.com/");
+            IList<IWebElement> newProductList = WebDriver.FindElements(By.CssSelector(".widget-new-products .products-grid .item"));
+            Console.WriteLine("Number of new products: " + newProductList.Count());
+            foreach (var i in newProductList)
+                Console.WriteLine(i);
+           
         }
 
         [TearDown]
