@@ -94,14 +94,23 @@ namespace TestSeleniumNunit
         {
             WebDriver.Navigate().GoToUrl("http://qa2magento.dev.evozon.com/");
             IList<IWebElement> newProductList = WebDriver.FindElements(By.CssSelector(".widget-new-products .products-grid .item"));
-            Console.WriteLine("Number of new products: " + newProductList.Count());
+            //Console.WriteLine("Number of new products: " + newProductList.Count());
+            List<string> name = new List<string>();
             foreach (var i in newProductList)
-                Console.WriteLine(i);
+            {
+                name.Add(i.Text);
+                //Console.WriteLine(i);
+
+            }
+            List<string> name2 = new List<string>(){ "LINEN BLAZER", "ELIZABETH KNIT TOP", "CHELSEA TEE",
+            "LAFAYETTE CONVERTIBLE DRESS", "TORI TANK"};
+            Assert.AreEqual(name, name2 );
+
+           
            
         }
 
         [TearDown]
-
         public void finish()
         {
             WebDriver.Quit();
